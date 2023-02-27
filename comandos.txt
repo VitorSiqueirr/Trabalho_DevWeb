@@ -1,0 +1,28 @@
+docker run --name postgres -e POSTGRES_PASSWORD=docker -p 5433:5432 -d postgres
+docker ps
+dbeaver cria conexão, porta 5433, cria nova database nome apilocacao-livros
+
+npm run typeorm migration:create -- -n CreateProducts
+npm run typeorm migration:run
+
+insomnia enviromnent
+{
+	"base_url": "http://localhost:3333",
+	"token": ""
+}
+
+cria um folder Products e cria dentro dele os requests
+Cria um request com post chamado Criar=_.base_url/products, coloca body
+{
+	name: 
+	price:
+	quantity:
+}
+Cria um request com put chamado exbir e listar Exibir=_.base_url/products Listar=_.base_url/products/id
+Cria um request chamado Atualizar=_.base_ur/products/id e body
+{
+	name: 
+	price:
+	quantity:
+}
+Cria um request chamado Excluir=_.base_url/products/id
