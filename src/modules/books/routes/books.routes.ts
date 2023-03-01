@@ -1,16 +1,19 @@
 import { Router } from "express";
 import { celebrate, Joi, Segments } from "celebrate";
 import BooksController from "../controllers/BooksController";
+import isAuthtenticated from "../../../shared/http/middlewares/isAuthenticated";
 
 const booksRouter = Router();
 const booksConstroller = new BooksController();
 
 booksRouter.get("/", booksConstroller.index);
+
 booksRouter.get("/:id",celebrate({
     [Segments.PARAMS]: { id: Joi.string().uuid().required() }
 }),booksConstroller.show
 );
-booksRouter.post("/",celebrate({
+
+booksRouter.post("/", isAuthtenticated, celebrate({
     [Segments.BODY]: {
         name: Joi.string().required(),
         author: Joi.string().required(),
@@ -25,7 +28,8 @@ booksRouter.post("/",celebrate({
     }
 }),booksConstroller.create
 );
-booksRouter.put("/:id",celebrate({
+
+booksRouter.put("/:id", isAuthtenticated, celebrate({
     [Segments.PARAMS]: { id: Joi.string().uuid().required() },
     [Segments.BODY]: {
         name: Joi.string().required(),
@@ -41,7 +45,8 @@ booksRouter.put("/:id",celebrate({
     }
 }),booksConstroller.update
 );
-booksRouter.delete("/:id", celebrate({
+
+booksRouter.delete("/:id", isAuthtenticated, celebrate({
     [Segments.PARAMS]: { id: Joi.string().uuid().required() }
 }), booksConstroller.delete
 );
