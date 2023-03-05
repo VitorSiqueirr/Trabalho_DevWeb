@@ -9,7 +9,7 @@ interface IRequest {
   email: string;
 }
 
-export default class SendForgotPasswordEmail {
+export default class SendForgotPasswordEmailService {
   public async execute({ email }: IRequest): Promise<void> {
     const userRepository = getCustomRepository(UserRepository);
     const userTokensRepository = getCustomRepository(UserTokensRepository);
@@ -19,17 +19,14 @@ export default class SendForgotPasswordEmail {
       "views",
       "forgot_password.hbs"
     );
-
     const user = await userRepository.findByEmail(email);
     if (!user) {
       throw new AppError("User does not exist.");
     }
-
     const { token } = await userTokensRepository.generate(user.id);
-    console.log(token);
     await EtherealMail.sendMail({
       to: { name: user.name, email: user.email },
-      subject: "[API VENDAS] - Recuperação de Senha",
+      subject: "[API Vendas] - Recuperação de Senha",
       templateData: {
         file: forgotPasswordTemplate,
         variables: {
