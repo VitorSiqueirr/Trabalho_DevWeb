@@ -11,7 +11,6 @@ export default class ShowReaderService {
   public async execute({ id }: IRequest): Promise<Reader> {
     const readersRepository = getCustomRepository(ReadersRepository);
     const readers = await readersRepository.findById(id);
-    console.log(readers);
     if (!readers) {
       throw new AppError("Reader not found!");
     }
