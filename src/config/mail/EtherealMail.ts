@@ -23,7 +23,7 @@ interface ISendMail {
 }
 
 export default class EtherealMail {
-  static async sendMain({
+  static async sendMail({
     to,
     from,
     subject,
