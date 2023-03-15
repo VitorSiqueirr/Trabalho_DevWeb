@@ -1,12 +1,14 @@
+import OrderBooks from "@modules/orders/typeorm/entities/OrderBooks";
 import {
     Column,
     CreateDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
   } from "typeorm";
   
   @Entity("readers")
-  export default class Customer {
+  export default class Reader {
     @PrimaryGeneratedColumn("uuid")
     id: string;
     @Column()

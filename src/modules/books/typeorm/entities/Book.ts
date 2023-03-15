@@ -1,7 +1,9 @@
+import OrderBooks from "@modules/orders/typeorm/entities/OrderBooks";
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -9,6 +11,8 @@ import {
 export default class Book {
   @PrimaryGeneratedColumn("uuid")
   id: string;
+  @OneToMany(() => OrderBooks, order_books => order_books.book)
+  order_books: OrderBooks[];
   @Column()
   name: string;
   @Column()
