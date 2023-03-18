@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateBooks1670891494416 implements MigrationInterface {
+export class CreateBook1679159781453 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -20,7 +20,7 @@ export class CreateBooks1670891494416 implements MigrationInterface {
           { name: "publishing_company", type: "varchar" },
           { name: "genre", type: "varchar" },
           { name: "sub_genre", type: "varchar" },
-          { name: "price", type: "decimal", precision: 10, scale: 2},
+          { name: "price", type: "decimal", precision: 10, scale: 2 },
           { name: "quantity", type: "int" },
           { name: "release_date", type: "timestamp" },
           { name: "created_at", type: "timestamp", default: "now()" },

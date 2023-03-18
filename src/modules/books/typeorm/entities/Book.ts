@@ -11,7 +11,7 @@ import {
 export default class Book {
   @PrimaryGeneratedColumn("uuid")
   id: string;
-  @OneToMany(() => OrderBooks, order_books => order_books.book)
+  @OneToMany(() => OrderBooks, (order_books) => order_books.book)
   order_books: OrderBooks[];
   @Column()
   name: string;

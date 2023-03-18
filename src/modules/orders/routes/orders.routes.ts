@@ -1,23 +1,31 @@
 import isAuthenticated from "@shared/http/middlewares/isAuthenticated";
-import { celebrate, Joi, Segments } from "celebrate";
+import { celebrate, Segments } from "celebrate";
 import { Router } from "express";
-import OrdersController from "../controllers/OrderController";
+import Joi from "joi";
+import OrderController from "../controllers/OrderController";
 
+const orderRouter = Router();
+const ordersController = new OrderController();
 
-const ordersRouter = Router();
-const ordersController = new OrdersController();
+orderRouter.use(isAuthenticated);
 
-ordersRouter.use(isAuthenticated);
+orderRouter.get(
+  "/:id",
+  celebrate({
+    [Segments.PARAMS]: { id: Joi.string().uuid().required() },
+  }),
+  ordersController.show
+);
 
-ordersRouter.get('/:id', celebrate({
-    [Segments.PARAMS]: {id: Joi.string().uuid().required()}
-}), ordersController.show);
-
-ordersRouter.post('/', celebrate({
+orderRouter.post(
+  "/",
+  celebrate({
     [Segments.BODY]: {
-        reader_id: Joi.string().required(),
-        books: Joi.required()
-    }
-}), ordersController.create);
+      reader_id: Joi.string().required(),
+      books: Joi.required(),
+    },
+  }),
+  ordersController.create
+);
 
-export default ordersRouter;
+export default orderRouter;

@@ -11,6 +11,6 @@ export default class UserTokens{
     user_id: string;
     @CreateDateColumn()
     created_at: Date;
-    @CreateDateColumn()
+    @CreateDateColumn() 
     updated_at: Date;
 }

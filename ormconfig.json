@@ -4,7 +4,7 @@
     "port": "5433",
     "username": "postgres",
     "password": "docker",
-    "database": "apilivros",
+    "database": "apilivros-web",
     "entities": ["./src/modules/**/typeorm/entities/*.ts"],
     "migrations": ["./src/shared/typeorm/migrations/*.ts"],
     "cli": { "migrationsDir": "./src/shared/typeorm/migrations" }
